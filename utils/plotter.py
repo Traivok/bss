@@ -38,6 +38,7 @@ class Plotter:
     def __init__(self, data, name):
         self.data = data
         self.name = name
+        print(self.name)
 
     def plot_series(self):
         lbb_samples = lbb(
