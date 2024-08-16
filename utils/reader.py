@@ -15,12 +15,12 @@ class CryptoCsvReader:
         df.set_index('Date', inplace=True)
 
         # Filter the data to the specified date range
-        start_date = pd.to_datetime('2020-04-10')
-        end_date = pd.to_datetime('2024-07-25')
+        start_date = pd.to_datetime('2020-05-1')
+        end_date = pd.to_datetime('2024-07-24')
         df = df.loc[start_date:end_date]
 
         # Create a complete date range from the start to end dates
-        date_range = pd.date_range(start=df.index.min(), end=df.index.max(), freq='B')
+        date_range = pd.date_range(start=start_date, end=end_date, freq='D')
 
         # Reindex the DataFrame to include all business days
         df = df.reindex(date_range)
@@ -35,3 +35,5 @@ class CryptoCsvReader:
         # Extract the specified column as a numpy array
         df_filtered = df[[self.column_name]]
         return df_filtered[self.column_name].to_numpy()
+
+#%%

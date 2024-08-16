@@ -56,7 +56,7 @@ def read_csv(csv_file):
 
 
 # File paths
-json_file = 'json/gold.json'
+json_file = 'json/cmx.json'
 
 # Convert JSON to CSV
 json_to_csv(json_file)
