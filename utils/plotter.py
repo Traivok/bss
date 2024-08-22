@@ -48,7 +48,18 @@ class Plotter:
         # Plotting the mean of the LBB samples
         lbb_df.groupby("variable").agg("mean")["value"].plot(color="red")
         plt.plot(self.data)
-        plt.title(f"LBB mean in red and original time series in blue for {self.name}")
+
+        # Adjust the title to be inside the plot
+        plt.text(
+            x=0.7,  # Horizontal position in axes coordinates (0 to 1)
+            y=0.9,  # Vertical position in axes coordinates (0 to 1)
+            s=f"{self.name}",
+            fontsize=14,
+            weight='bold',
+            ha='center',
+            transform=plt.gca().transAxes
+        )
+
         plt.grid(False)
         plt.savefig(f'imgs/{self.name}_lbb_mean.png')
         plt.show()
@@ -64,36 +75,18 @@ class Plotter:
             x='variable', y='value',
             err_style="band", errorbar=("ci", 95), estimator="mean",
         )
-        plt.title(f"LBB mean with Confidence Interval of 95% for {self.name}")
-        plt.grid(False)
-        plt.savefig(f'imgs/{self.name}_lbb_ci.png')
-        plt.show()
 
-    def plot_series(self):
-        lbb_samples = lbb(
-            self.data,
-            b=10,
-            B=.1,
-            size=100
+        # Adjust the title to be inside the plot
+        plt.text(
+            x=0.7,  # Horizontal position in axes coordinates (0 to 1)
+            y=0.9,  # Vertical position in axes coordinates (0 to 1)
+            s=f"{self.name}",
+            fontsize=14,
+            weight='bold',
+            ha='center',
+            transform=plt.gca().transAxes
         )
-        lbb_df = pd.DataFrame(lbb_samples).reset_index()
-        lbb_df = lbb_df.melt(id_vars='index', value_vars=lbb_df.columns[1:])
 
-        # Plotting the mean of the LBB samples
-        lbb_df.groupby("variable").agg("mean")["value"].plot(color="red")
-        plt.plot(self.data)
-        plt.title(f"LBB mean in red and original time series in blue for {self.name}")
-        plt.grid(False)
-        plt.savefig(f'imgs/{self.name}_lbb_mean.png')
-        plt.show()
-
-        # Plotting the mean of the LBB samples with confidence interval
-        sns.lineplot(
-            lbb_df,
-            x='variable', y='value',
-            err_style="band", errorbar=("ci", 95), estimator="mean",
-        )
-        plt.title(f"LBB mean with Confidence Interval of 95% for {self.name}")
         plt.grid(False)
         plt.savefig(f'imgs/{self.name}_lbb_ci.png')
         plt.show()
@@ -111,11 +104,22 @@ class Plotter:
         value_df = pd.DataFrame(value_dict).reset_index()
         value_df = value_df.melt(id_vars='index', value_vars=value_df.columns[1:])
         sns.barplot(value_df, x='variable', y='value', errorbar="sd")
-        plt.title(f"MFN method results for {self.name}")
-        plt.grid(False)
+
+        # Adjust the title to be inside the plot
+        ax.text(
+            x=0.7,  # Horizontal position in axes coordinates (0 to 1)
+            y=0.9,  # Vertical position in axes coordinates (0 to 1)
+            s=f"{self.name}",
+            fontsize=14,
+            weight='bold',
+            ha='center',
+            transform=ax.transAxes
+        )
+
+        ax.grid(False)
         f.tight_layout()
         plt.savefig(f'imgs/{self.name}_mfn.png')
-
+        return value_dict
 
     def plot_table(self):
         # Set the theme for the plot
