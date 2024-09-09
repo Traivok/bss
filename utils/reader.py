@@ -4,15 +4,15 @@ from numpy import ndarray
 class CryptoCsvReader:
     def __init__(self, path):
         self.path = path
-        self.column_name = 'Close'
+        self.column_name = 'value'
 
     def read(self) -> ndarray:
         # Load the data from the CSV file
         df = pd.read_csv(self.path, sep=',')
 
         # Convert 'Date' column to datetime format and set it as the index
-        df['Date'] = pd.to_datetime(df['Date'])
-        df.set_index('Date', inplace=True)
+        df['date'] = pd.to_datetime(df['date'])
+        df.set_index('date', inplace=True)
 
         # Filter the data to the specified date range
         start_date = pd.to_datetime('2020-05-1')
@@ -30,7 +30,7 @@ class CryptoCsvReader:
 
         # Reset the index to have 'Date' as a column again
         df.reset_index(inplace=True)
-        df.rename(columns={'index': 'Date'}, inplace=True)
+        df.rename(columns={'index': 'date'}, inplace=True)
 
         # Extract the specified column as a numpy array
         df_filtered = df[[self.column_name]]
