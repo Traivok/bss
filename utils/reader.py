@@ -15,7 +15,7 @@ class CryptoCsvReader:
         df.set_index('date', inplace=True)
 
         # Filter the data to the specified date range
-        start_date = pd.to_datetime('2024-01-11')
+        start_date = pd.to_datetime('2014-06-09')
         end_date = pd.to_datetime('2024-06-05')
         df = df.loc[start_date:end_date]
 
