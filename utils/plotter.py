@@ -41,7 +41,7 @@ class Plotter:
         print(self.name)
 
     def plot_lbb_mean(self):
-        lbb_samples = lbb(self.data, b=10, B=.1, size=100)
+        lbb_samples = lbb(self.data, b=147, B=.147, size=147)
         lbb_df = pd.DataFrame(lbb_samples).reset_index()
         lbb_df = lbb_df.melt(id_vars='index', value_vars=lbb_df.columns[1:])
 
@@ -65,7 +65,7 @@ class Plotter:
         plt.show()
 
     def plot_lbb_mean_with_ci(self):
-        lbb_samples = lbb(self.data, b=10, B=.1, size=100)
+        lbb_samples = lbb(self.data, b=147, B=.147, size=147)
         lbb_df = pd.DataFrame(lbb_samples).reset_index()
         lbb_df = lbb_df.melt(id_vars='index', value_vars=lbb_df.columns[1:])
 
@@ -94,9 +94,9 @@ class Plotter:
     def plot_mfn(self):
         value_dict = MFN(
             self.data,
-            b=10,
-            B=.1,
-            size=100,
+            b=147,
+            B=.147,
+            size=147,
             dx=3
         )
 

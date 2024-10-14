@@ -15,8 +15,8 @@ class CryptoCsvReader:
         df.set_index('date', inplace=True)
 
         # Filter the data to the specified date range
-        start_date = pd.to_datetime('2020-05-1')
-        end_date = pd.to_datetime('2024-07-24')
+        start_date = pd.to_datetime('2024-01-11')
+        end_date = pd.to_datetime('2024-06-05')
         df = df.loc[start_date:end_date]
 
         # Create a complete date range from the start to end dates
@@ -26,8 +26,8 @@ class CryptoCsvReader:
         df = df.reindex(date_range)
 
         # Forward fill the missing data
-        df.fillna(method='ffill', inplace=True)
-
+        # df.fillna(method='ffill', inplace=True)
+        df.ffill(inplace=True)
         # Reset the index to have 'Date' as a column again
         df.reset_index(inplace=True)
         df.rename(columns={'index': 'date'}, inplace=True)
@@ -36,4 +36,4 @@ class CryptoCsvReader:
         df_filtered = df[[self.column_name]]
         return df_filtered[self.column_name].to_numpy()
 
-#%%
+
