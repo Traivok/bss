@@ -59,7 +59,9 @@ class Plotter:
             ha='center',
             transform=plt.gca().transAxes
         )
-
+        plt.xlabel('Date [days]')        
+        plt.ylabel('Price [R$]')
+    
         plt.grid(False)
         plt.savefig(f'imgs/{self.name}_lbb_mean.png')
         plt.show()
@@ -86,7 +88,8 @@ class Plotter:
             ha='center',
             transform=plt.gca().transAxes
         )
-
+        plt.xlabel('Date [days]')        
+        plt.ylabel('Price [R$]') 
         plt.grid(False)
         plt.savefig(f'imgs/{self.name}_lbb_ci.png')
         plt.show()
@@ -115,7 +118,7 @@ class Plotter:
             ha='center',
             transform=ax.transAxes
         )
-
+        ax.set_xticks(['PE','FIM','MIEE'])
         ax.grid(False)
         f.tight_layout()
         plt.savefig(f'imgs/{self.name}_mfn.png')
