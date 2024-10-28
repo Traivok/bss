@@ -26,8 +26,8 @@ class CryptoCsvReader:
         df = df.reindex(date_range)
 
         # Forward fill the missing data
-        df.fillna(method='ffill', inplace=True)
-
+        # df.fillna(method='ffill', inplace=True)
+        df.ffill(inplace=True)
         # Reset the index to have 'Date' as a column again
         df.reset_index(inplace=True)
         df.rename(columns={'index': 'Date'}, inplace=True)
